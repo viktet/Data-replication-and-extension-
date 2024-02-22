@@ -1,0 +1,377 @@
+---
+title: |
+  Extended replication of:
+  \
+  \
+  **The Impact of Gig Economy on Product Quality through the Labor Market: Evidence from Ride-sharing and Restaurant Quality^[https://doi.org/10.1287/mnsc.2022.4481]**
+  \
+  \
+subtitle: |
+    _Introduction to Applied Econometrics_
+
+author: "Author: Victoria Teterkina^[MSs. Economics and Management, Leibniz University Hannover. E-mail: teterkina@stud.uni-hannover.de. Matriculation number: 10024311]\n\n\ Lecturer: Dr. Tobias Korn\n\n\ Help-Desk Manager: Thomas Schiller"
+date: 21 Januar 2024
+output: pdf_document
+bibliography: citations.bib
+csl: elsevier-harvard.csl
+header-includes:
+- \usepackage{placeins}
+- \usepackage{float}
+- "\\usepackage{setspace}"
+- "\\setstretch{1.5}"
+fontsize: 11pt
+---
+\newpage
+
+## 1. Critical Review of the Hypotheses, Data and Methods ##
+
+### Hypotheses ###
+The rapid expansion of the gig economy in recent years has significantly altered the landscape of many industries. The gig economy, defined by temporary and on-demand work arrangements, keeps disrupting labour markets by providing job opportunities for low-wage and less-educated workers. @shin_impact_2023 conduct a study building on previous researches about the supply-side effects of the gig economy. They make a valuable contribution to the existing literature by examining the indirect impact of ride-sharing platforms on the restaurant industry. Their research is based on a natural experiment in which due to legal regulations ride-sharing platforms Uber and Lyft left the Austin, Texas market in May 2016 and reentered in May 2017. The main focus is to establish the causal relationship between the presence of the ride-sharing platforms and changes in the service and food quality in restaurants of Austin. To run this empirical test, the authors posit the following hypothesis:
+\
+**Hypothesis 1** Uber and Lyft's presence in Austin led to a decrease in the service quality provided by those restaurants.
+\
+**Hypothesis 2** Uber and Lyft's presence in Austin led to an increase in the employee turnover for the city's restaurants. 
+
+The findings show a decrease in the restaurants quality due to an increase in the employee turnover caused by the presence of Uber/Lyft that offer job opportunities, which restaurant workers find rather exciting. Furthermore, the impact of Uber/Lyft is found to be significant for the service quality, but not for the food. This is explained as follows: on average, chefs receive higher salaries than the wait-staff, and, therefore, they are more resistant towards jobs offers from the gig economy. 
+
+
+### Data ###
+For testing the first hypothesis the research employs Yelp reviews of restaurants in Austin and Dallas between May 2014 and May 2019. Although the review data provides multiple measures such as number of reviews, price tier, and whether a review is positive, negative or neutral, it has several limitations. 
+
+First, customer reviews do not provide an objective measure as they are based on individual opinions only. Second, reviews on online platforms could be easily manipulated by the businesses themselves as well as by their competitors, which creates doubt on the reliability of the information. Alternatively, the research could employ customer questionnaires (@rajput_satisfaction_2020; @wong_ooi_mei_analysing_1999), face-to-face interviews with customers (@mendocilla_quickserv:_2021). Moreover, the researcher could develop anonymous employee surveys (@prentice_impact_2020), where they would ask questions on hygiene and other measures of service and food quality in the participating restaurants.
+
+Furthermore, the sample selection raises serious concerns. For example, applying filters that exclude restaurants with less than 200 reviews, reduces the sample size significantly, which would certainly affect the representatives of the population. Restaurants with less than 200 reviews are assumed to be either less popular or visited by a very specific customer group, for instance, elderly, who do not leave reviews online. Each of the cases imply different settings for the employee turnover, which would be interesting to examine. 
+
+To test the second hypothesis the researchers analyse the unique restaurant employee turnover data on a worker level. A prominent limitation here is the lack of the data source. We may only assume that it was obtained from the Human Resources department of the participating restaurants. Although this data is a good measure for the correlation between the presence of ride-sharing platforms and the increase in employee turnover rates, it fails to provide information on whether the gig economy truly “poach” individuals working in the restaurant industry. 
+
+Therefore, the data does not appear to be reliable enough for establishing a causal relationship between the increase in employee turnover rates and the presence of Uber/Lyft. One could only prove this assumption if had information on whether restaurant workers quit for better job opportunities offered by the gig economy or get employed elsewhere. Furthermore, the authors do not elaborate on the sample selection, which makes it hard to objectively assess the observability of the selected sample. 
+
+### Empirical methods ###
+
+To investigate the impact of the presence of Uber and Lyft on the changes in the service and food quality in restaurants of Austin, the research employs Difference-in-Differences approach. Although the research includes Dallas as a control to strengthen the study framework, it does not provide a detailed explanation on selecting this specific city. The researchers rely on the information taken from a web-site article which discusses the comparability of Austin and Dallas, without carrying out their own analysis. Nevertheless, the research demonstrates the parallel trends between the treatment and control groups, which is a crucial assumption of the DiD approach. Another critical assumption is exogeneity, a condition that the researchers ensure by highlighting the fact that both exit and return of Uber/Lyft happened due to regulatory policy changes.
+
+Even though the research does not specify on potential confounders that could bias the results, it provides a series of robustness checks that are congruent with the main results. 
+
+## 2. Replication of the Main Tables ##
+
+This part includes replication of Yelp Review Data Analysis results. We do not replicate any results from the Employee Turnover Data Analysis, as due to confidentiality reasons the researchers provided us only with synthetic data. 
+
+For the replication part we create 2 interaction terms:
+
+1. Austin Dummy with time variable: After Uber/Luft returned to Austin
+2. Austin Dummy with time variable: Before Uber/Lyft exited Austin 
+
+Austin Dummy indicates whether a restaurant is located in the city of Austin or not. Both time variables indicate presence of Uber/Lyft in Austin (in months). Uber/Lyft exited Austin in May 2016 and returned in May 2017.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Table 3: Difference-in-Difference (Service) ###
+
+We run a regression model with month and restaurant as fixed effects, clustering the standard error at the restaurant level. The dependent variable is *Ratio of Complaints on Service* and the independent variables are two interaction terms described above. 
+
+\FloatBarrier
+\begin{table}[h!] \centering 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & Ratio of Complaints on Service \\ 
+\hline \\[-1.8ex] 
+ Austin Dummy x After Uber/Lyft return & 0.014$^{**}$ \\ 
+  & (0.006) \\ 
+  & \\ 
+ Austin Dummy x Before Uber/Lyft exit & 0.008 \\ 
+  & (0.006) \\ 
+  & \\ 
+\hline \\[-1.8ex] 
+Observations & 58,227 \\ 
+R$^{2}$ & 0.131 \\ 
+Adjusted R$^{2}$ & 0.113 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+\FloatBarrier
+
+### Table 4: Difference-in-Difference (Food) ###
+
+We run the same regression as in Table 3, but with *Ratio of Complaints on Food* as dependent variable.
+
+\FloatBarrier 
+\begin{table}[h!] \centering 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & Ratio of Complaints on Food \\ 
+\hline \\[-1.8ex] 
+ Austin Dummy x After Uber/Lyft return & 0.004 \\ 
+  & (0.006) \\ 
+  & \\ 
+ Austin Dummy x Before Uber/Lyft exit & $-$0.002 \\ 
+  & (0.006) \\ 
+  & \\ 
+\hline \\[-1.8ex] 
+Observations & 58,227 \\ 
+R$^{2}$ & 0.061 \\ 
+Adjusted R$^{2}$ & 0.042 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+\FloatBarrier 
+
+### Table 5 Difference-in-Difference ($ restaurant) ###
+
+We run the same regression as in Table 3, but this time focusing on low tier restaurants. To analyze the quality of service by restaurant tier, we first combine levels \$\$ and \$\$\$ together. Then we create a subset *low tier* that includes restaurants that are assigned only one dollar sign $ in the app.
+\FloatBarrier
+\begin{table}[h!] \centering 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & Ratio of Complaints on Service \\ 
+\hline \\[-1.8ex] 
+ Austin Dummy x After Uber/Lyft return & 0.025$^{**}$ \\ 
+  & (0.012) \\ 
+  & \\ 
+ Austin Dummy x Before Uber/Lyft exit & $-$0.007 \\ 
+  & (0.013) \\ 
+  & \\ 
+\hline \\[-1.8ex] 
+Observations & 12,771 \\ 
+R$^{2}$ & 0.143 \\ 
+Adjusted R$^{2}$ & 0.119 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+\FloatBarrier
+
+### Table 6 Difference-in-Difference (\$\$ or \$\$\$ restaurant) ###
+
+We run the same regression as in Table 5, but this time for the *high tier*, which include restaurants that are assigned two-dollar \$\$ or three-dollar \$\$\$  sign in the app. 
+
+\FloatBarrier 
+\begin{table}[H] \centering 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & Ratio of Complaints on Service \\ 
+\hline \\[-1.8ex] 
+ Austin Dummy x After Uber/Lyft return & 0.005 \\ 
+  & (0.006) \\ 
+  & \\ 
+ Austin Dummy x Before Uber/Lyft & 0.012$^{*}$ \\ 
+  & (0.007) \\ 
+  & \\ 
+\hline \\[-1.8ex] 
+Observations & 45,456 \\ 
+R$^{2}$ & 0.127 \\ 
+Adjusted R$^{2}$ & 0.109 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+\FloatBarrier 
+
+The results we obtain in this replication part are almost identical to the ones in the research. This signifies that the methods employed by the researchers are reliable and easy to follow. 
+
+## 3. Additional Robustness Tests ##
+
+In order to verify the reliability of the main research results, we conduct 3 additional Robustness Tests. 
+
+### Robustness Test 1 ###
+
+We would like to compare the impact of Uber/Lyft presence on quality of service by restaurant tier
+in Austin and Dallas seperately. For this purpose we create 2 sub-sets: one for Austin and one for Dallas. 
+
+\FloatBarrier 
+\begin{table}[H] \centering 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lcc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-3} 
+\\[-1.8ex] & \multicolumn{2}{c}{Ratio of Complaints on Service} \\ 
+\\[-1.8ex] & (1) & (2)\\ 
+\hline \\[-1.8ex] 
+ One-Dollar-sign Dummy x After Uber/Lyft return & 0.005 & 0.026$^{***}$ \\ 
+  & (0.009) & (0.010) \\ 
+  & & \\ 
+ One-Dollar-sign Dummy x Before Uber/Lyft exit & 0.014 & $-$0.005 \\ 
+  & (0.010) & (0.011) \\ 
+  & & \\ 
+\hline \\[-1.8ex] 
+City & Dallas & Austin \\
+Observations & 40,528 & 17,699 \\ 
+R$^{2}$ & 0.118 & 0.149 \\ 
+Adjusted R$^{2}$ & 0.101 & 0.127 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table}
+\FloatBarrier 
+
+As expected the return of Uber and Lyft had a significant impact for Austin. It is associated with 2.6 percentage points increase in the likelihood of a low tier restaurant receiving a negative review about its service in comparison to a high tier restaurant. 
+
+### Robustness Test 2 ###
+
+We run the same regressions as in Tables 3 and 4, using dummies as our outcome variables:
+
+1. Negative food Dummy, taking values of "1", if the percentage of Yelp reviews written about the restaurant in the month that were negative about the food is equal to or greater than 50%, and value of "0" - otherwise;
+
+2. Negative service Dummy, taking values of "1", if the percentage of Yelp reviews written about the restaurant in the month that were negative about the service is equal to or greater than 50%, and value of "0" - otherwise
+
+\FloatBarrier
+\begin{table}[H] \centering 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lcc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-3} 
+\\[-1.8ex] & Negative food Dummy & Negative service Dummy \\ 
+\\[-1.8ex] & (1) & (2)\\ 
+\hline \\[-1.8ex] 
+ Austin Dummy x After Uber/Lyft return & 0.002 & 0.021$^{***}$ \\ 
+  & (0.008) & (0.008) \\ 
+  & & \\ 
+ Austin Dummy x Before Uber/Lyft exit & $-$0.008 & 0.004 \\ 
+  & (0.008) & (0.008) \\ 
+  & & \\ 
+\hline \\[-1.8ex] 
+Observations & 58,227 & 58,227 \\ 
+R$^{2}$ & 0.073 & 0.122 \\ 
+Adjusted R$^{2}$ & 0.055 & 0.104 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+\FloatBarrier
+
+The DiD coefficients for both service and food are similar to what was observed in the main analysis.
+
+### Robustness Test 3 ###
+
+Here we regroup restaurants by their dollar sign: low tier now include restaurants that are assigned one $ and two \$\$ dollar sign in the app. High tier now consists only three \$\$\$ dollar sign restaurants.
+
+\FloatBarrier
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lcc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-3} 
+\\[-1.8ex] & \multicolumn{2}{c}{Ratio of Complaints on Service} \\ 
+\\[-1.8ex] & (One- and Two-Dollar sign) & (Three-Dollar sign)\\ 
+\hline \\[-1.8ex] 
+ Austin Dummy x After Uber/Lyft return & 0.013$^{**}$ & 0.036 \\ 
+  & (0.006) & (0.022) \\ 
+  & & \\ 
+ Austin Dummy x Before Uber/Lyft exit & 0.009 & $-$0.005 \\ 
+  & (0.006) & (0.019) \\ 
+  & & \\ 
+\hline \\[-1.8ex] 
+Observations & 53,991 & 4,236 \\ 
+R$^{2}$ & 0.135 & 0.081 \\ 
+Adjusted R$^{2}$ & 0.117 & 0.051 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table}
+\FloatBarrier
+
+We still observe a significant positive effect by the low tier restaurants after Uber/Lyft returns to Austin, but it is almost twice as small as by the initial group assignment (Table 5). This observation confirms the finding about that one \$ dollar sign restaurants are the most affected by the presence of Uber and Lyft.
+
+## 4. Dataset Extension ##
+
+In this section, we expand upon the original research by examining alternative ways through which the gig economy impacts the quality of restaurants, namely by changing the outcome variables. We employ data from Google Trends on two topics - food recipes and food poisoning - in the regions of Austin and Dallas. To tackle a potential problem of low search term popularity, we combine several search terms for each of the topics. 
+
+1. *Total searches: recipes* consists of the following similar search terms: easy recipes, simple recipes, quick recipes.
+2. *Total searches: poisoning* consists of the following inter correlated search terms: food poisoning and diarrhea. 
+
+Before moving to the analysis part, we should elaborate on why these variables are good measures of the restaurant quality.  
+
+The logic behind *Total searches: recipes* could be explained as follows: customers that are not satisfied with their restaurant experience are more likely to search for online recipes and cook at home. Therefore, we expect that the presence of Uber/Lyft would have a positive impact on the number searches for food recipes, as the restaurant quality decreases. 
+
+The choice of the *Total searches: poisoning* variable is motivated by the hypothesis 1: Uber and Lyft's presence leads to a decrease in the restaurant quality, specifically food quality. We assume that reduction of food quality leads to customers food poisoning, and, therefore, to increase in the number of Google searches on food poisoning and diarrhea. 
+
+In addition, we provide a correlation matrix to demonstrate how the new and the original outcome variables interact with each other. We observe a positive linear relationship across all variable pairs, which supports our assumption regarding the appropriateness of using *Total searches: recipes* and *Total searches: poisoning* as the outcome variables. 
+
+\FloatBarrier 
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Negative food & Negative service & Searches recipes & Searches poisoning \\ 
+  \hline
+  Negative food  & 1.00 & 0.91 & 0.45 & 0.44 \\ 
+  Negative service & 0.91 & 1.00 & 0.41 & 0.45 \\ 
+  Searches recipes & 0.45 & 0.41 & 1.00 & 0.31 \\ 
+  Searches poisoning & 0.44 & 0.45 & 0.31 & 1.00 \\ 
+   \hline
+\end{tabular}
+\end{table}
+\FloatBarrier 
+
+\newpage
+
+Similar to the main analysis, we employ the DiD method and run two linear regressions with *month* as a fixed effect, clustering the standard error at the city level.
+
+\FloatBarrier 
+\begin{table}[H] \centering 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lcc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-3} 
+\\[-1.8ex] & Total searches: recipes & Total searches: food poisoning \\ 
+\\[-1.8ex] & (1) & (2)\\ 
+\hline \\[-1.8ex] 
+ Austin Dummy x After Uber/Lyft return & 28.341$^{***}$ & $-$8.090$^{***}$ \\ 
+  & & \\ 
+ Austin Dummy x Before Uber/Lyft exit & $-$41.668$^{***}$ & $-$3.126$^{***}$ \\ 
+  & & \\ 
+ Austin Dummy & $-$85.940$^{***}$ & $-$50.750$^{***}$ \\ 
+  & & \\ 
+\hline \\[-1.8ex] 
+Observations & 122 & 122 \\ 
+R$^{2}$ & 0.932 & 0.933 \\ 
+Adjusted R$^{2}$ & 0.858 & 0.859 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+\FloatBarrier 
+
+As shown in the table, return of Uber/Lyft is associated with a considerable and statistically significant positive impact on the total number of searches for food recipes in Austin. As for the number of searches for food poisoning, we do not observe such an effect. This outcome confirms the finding of the main analysis on how the presence of Uber/Lyft does not lead to a reduction in the food quality. On average, chefs receive a better payment in comparison to wait-staff, and, therefore, are less influenced by the job opportunities that the gig economy has to offer. 
+
+As Google trends provides data at the city level only, we could not spot the effect at the lower levels by comparing restaurants of different tier types, which leaves space for further research. 
+
+\newpage
+
+## References ##
