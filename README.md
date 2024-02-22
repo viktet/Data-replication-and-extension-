@@ -12,4 +12,6 @@ The task consisted of four parts:
 #### 1. Critical Review of the Methods, Data, and Hypotheses
 #### 2. Replication of the Main Tables and Graphs
 #### 3. Additional Robustness Tests
-#### 4. Dataset Replication or Extension
+#### 4. Dataset Extension
+
+For the Dataset Extension part, I used data sets from Google Trends, aggregated and merged them with the original dataset.
