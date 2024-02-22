@@ -15,3 +15,11 @@ The task consisted of four parts:
 #### 4. Dataset Extension
 
 For the Dataset Extension part, I used data sets from Google Trends, aggregated and merged them with the original dataset.
+
+
+#### I uploaded
+1. Original scientific economic publication: *Uber_Jiwoong-2.pdf* 
+2. R code, R Markdown file, log file under the name *Extended Replication* 
+3. Final version of my homework as a pdf file under the same name
+
+
